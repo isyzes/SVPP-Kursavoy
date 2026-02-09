@@ -1,0 +1,86 @@
+﻿<Window x:Class="WPF.Client.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:viewmodels="clr-namespace:WPF.Client.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        Title="Бытовое обслуживание" Height="450" Width="850">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <!-- Мастер: Поставщики -->
+            <ColumnDefinition Width="5"/>
+            <!-- Разделитель -->
+            <ColumnDefinition Width="*"/>
+            <!-- Слейв: Услуги -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая часть: Поставщики (Master) -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Поставщики услуг" FontSize="16" FontWeight="Bold" Margin="10"/>
+
+            <!-- Панель кнопок для редактирования услуг -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+                <Button Content="Добавить"  Command="{Binding AddProviderCommand}" Margin="0,0,5,0" Width="80" Background="#00FA9A"/>
+                <Button Content="Редактировать"  Command="{Binding EditProviderCommand}" Margin="0,0,5,0" Width="90"/>
+                <Button Content="Удалить" Width="80" Command="{Binding DeleteProviderCommand}" Margin="0,0,5,0" Background="#FFE51400" Foreground="White"/>
+
+                <TextBox Margin="0,0,5,0" Width="130" />
+            </StackPanel>
+
+            <DataGrid Grid.Row="2"
+                      ItemsSource="{Binding Providers}"
+                      SelectedItem="{Binding SelectedProvider}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Разделитель -->
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"/>
+
+        <!-- Правая часть: Услуги (Slave) -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Услуги поставщика" FontSize="16" FontWeight="Bold" Margin="10"/>
+
+            <!-- Панель кнопок для редактирования услуг -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10">
+                <Button Content="Добавить" Command="{Binding AddServiceCommand}" Margin="0,0,5,0" Width="80" Background="#00FA9A"/>
+                <Button Content="Редактировать" Command="{Binding EditServiceCommand}" Margin="0,0,5,0" Width="90"/>
+                <Button Content="Удалить" Command="{Binding DeleteServiceCommand}" Margin="0,0,5,0" Width="80" Background="#FFE51400" Foreground="White"/>
+
+                <TextBox Margin="0,0,5,0" Width="130"/>
+            </StackPanel>
+
+            <DataGrid Grid.Row="2"
+                      ItemsSource="{Binding Services}"
+                      SelectedItem="{Binding SelectedService}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Услуга" Binding="{Binding Name}" Width="220"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding Price, StringFormat=C}" Width="70"/>
+                    <DataGridTextColumn Header="Длительность" Binding="{Binding Duration}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>
