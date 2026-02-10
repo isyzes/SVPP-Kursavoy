@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF.Client.ViewModels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WPF.Client.Views
 {
@@ -19,9 +20,6 @@ namespace WPF.Client.Views
     /// </summary>
     public partial class LoginView : Window
     {
-        public bool LoginSuccessful = false;
-       
-
         public LoginView()
         {
             InitializeComponent();
@@ -29,11 +27,21 @@ namespace WPF.Client.Views
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginSuccessful = true;
-        }
+            string username = usernameTextBox.Text;
+            string password = passwordBox.Password;
 
-        public bool loginSuccessful() { 
-            return LoginSuccessful;
-       }
+            bool isValid =
+                (username == "admin" && password == "admin") ||
+                (username == "user" && password == "user");
+
+            if (isValid)
+            {
+                DialogResult = true;
+            }
+            else
+            {
+                errorMessage.Text = "Неверный логин или пароль!";
+            }
+        }
     }
 }

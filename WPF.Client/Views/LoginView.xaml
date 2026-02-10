@@ -57,8 +57,9 @@
             </StackPanel>
 
             <!-- Сообщение об ошибке -->
-            <TextBlock Grid.Row="3" 
-                       Text="Неверный логин или пароль!"
+            <TextBlock x:Name="errorMessage" 
+                       Grid.Row="3" 
+                      
                        Foreground="Red"
                        TextWrapping="Wrap"
                        Margin="0,0,0,20"

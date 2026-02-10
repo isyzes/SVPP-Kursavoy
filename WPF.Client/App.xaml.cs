@@ -26,10 +26,8 @@ namespace WPF.Client
 
         }
 
-
         private void ConfigureServices(IServiceCollection services)
         {
-
             var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"]?.ConnectionString;
 
             services.AddDbContext<AppDbContext>(options =>
@@ -63,12 +61,17 @@ namespace WPF.Client
             InitializeDatabase();
 
             //var loginView = _serviceProvider.GetRequiredService<LoginView>();
-            //loginView.Show();
-            //loginView.ShowDialog();
-
-
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
+            var loginView = new LoginView();
+            var loginResult = loginView.ShowDialog();
+            if (loginResult == true)
+            {
+                var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                mainWindow.Show();
+            }
+            else
+            {
+                Shutdown();
+            }    
         }
 
         private void InitializeDatabase()
