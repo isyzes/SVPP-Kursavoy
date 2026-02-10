@@ -119,6 +119,16 @@ namespace WPF.Client.ViewModels
             get => _newService;
             set => SetProperty(ref _newService, value);
         }
+
+        public List<Provider> GetAllProviders() 
+        {
+            return _providerService.GetAllProviders();
+        }
+
+        public List<Service> GetServicesBySelectedProvider()
+        {
+            return _serviceService.GetServicesByProvider(_selectedProvider.Id);
+        }
         private async void LoadProviders()
         {
             var providers = await _providerService.GetAllProvidersAsync();

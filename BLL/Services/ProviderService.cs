@@ -77,5 +77,11 @@ namespace BLL.Services
                 Address = provider.Address
             };
         }
+
+        public List<Provider> GetAllProviders()
+        {
+            List<ProviderEntity> entities = _context.Providers.ToList();
+            return entities.Select(e => MapToModel(e)).ToList();
+        }
     }
 }

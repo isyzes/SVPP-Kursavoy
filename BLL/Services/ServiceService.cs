@@ -1,6 +1,7 @@
 ﻿using BLL.Models;
 using DAL.Context;
 using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
@@ -84,6 +85,14 @@ namespace BLL.Services
                 Duration = service.Duration,
                 ProviderId = service.ProviderId
             };
+        }
+
+        public List<Service> GetServicesByProvider(int providerId)
+        {
+           var entities =  _context.Services
+                .Where(s => s.ProviderId == providerId)
+                .ToList();
+            return entities.Select(e => MapToModel(e)).ToList();
         }
     }
 }

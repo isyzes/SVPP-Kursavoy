@@ -4,7 +4,7 @@
         xmlns:viewmodels="clr-namespace:WPF.Client.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         Title="Бытовое обслуживание" Height="450" Width="850">
-
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -31,7 +31,7 @@
                 <Button Content="Редактировать"  Command="{Binding EditProviderCommand}" Margin="0,0,5,0" Width="90"/>
                 <Button Content="Удалить" Width="80" Command="{Binding DeleteProviderCommand}" Margin="0,0,5,0" Background="#FFE51400" Foreground="White"/>
 
-                <TextBox Margin="0,0,5,0" Width="130" />
+                <TextBox x:Name="SearchProviderTextBox"  Margin="0,0,5,0" Width="130" TextChanged="SearchProvider"/>
             </StackPanel>
 
             <DataGrid Grid.Row="2"
@@ -66,7 +66,7 @@
                 <Button Content="Редактировать" Command="{Binding EditServiceCommand}" Margin="0,0,5,0" Width="90"/>
                 <Button Content="Удалить" Command="{Binding DeleteServiceCommand}" Margin="0,0,5,0" Width="80" Background="#FFE51400" Foreground="White"/>
 
-                <TextBox Margin="0,0,5,0" Width="130"/>
+                <TextBox x:Name="SearchServiceTextBox" Margin="0,0,5,0" Width="130" TextChanged="SearchService"/>
             </StackPanel>
 
             <DataGrid Grid.Row="2"
