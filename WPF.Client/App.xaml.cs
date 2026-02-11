@@ -35,7 +35,9 @@ namespace WPF.Client
                 options.UseSqlServer("Data Source=USER-PC\\SQLEXPRESS;Initial Catalog=HouseholdServicesDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True");
             }, ServiceLifetime.Scoped);
 
-          
+
+            services.AddSingleton<CurrentUser>();
+
             // Регистрация ViewModel
             services.AddTransient<MainViewModel>();
 
@@ -49,6 +51,8 @@ namespace WPF.Client
             services.AddSingleton<EditProviderView>();
         }
 
+        
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -60,8 +64,8 @@ namespace WPF.Client
 
             InitializeDatabase();
 
-            //var loginView = _serviceProvider.GetRequiredService<LoginView>();
-            var loginView = new LoginView();
+            var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            //var loginView = new LoginView();
             var loginResult = loginView.ShowDialog();
             if (loginResult == true)
             {

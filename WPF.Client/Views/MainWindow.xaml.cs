@@ -74,5 +74,10 @@ namespace WPF.Client.Views
                 viewModel.Services = new ObservableCollection<Service>(allServices);
             }
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Application.Current.Shutdown();
+        }
     }
 }

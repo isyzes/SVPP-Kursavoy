@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF.Client.ViewModels;
+using BLL.Models;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WPF.Client.Views
@@ -20,9 +21,11 @@ namespace WPF.Client.Views
     /// </summary>
     public partial class LoginView : Window
     {
-        public LoginView()
+        private readonly CurrentUser _currentUser;
+        public LoginView(CurrentUser currentUser)
         {
             InitializeComponent();
+            _currentUser = currentUser;
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
@@ -36,6 +39,8 @@ namespace WPF.Client.Views
 
             if (isValid)
             {
+                _currentUser.Login = username;
+                _currentUser.Role = username;
                 DialogResult = true;
             }
             else

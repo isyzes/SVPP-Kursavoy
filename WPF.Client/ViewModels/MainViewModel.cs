@@ -15,6 +15,7 @@ namespace WPF.Client.ViewModels
     {
         private readonly IProviderService _providerService;
         private readonly IServiceService _serviceService;
+        private readonly CurrentUser _currentUser;
 
         private ObservableCollection<Provider> _providers;
         private Provider _selectedProvider;
@@ -34,17 +35,17 @@ namespace WPF.Client.ViewModels
         public ICommand EditServiceCommand { get; }
         public ICommand DeleteServiceCommand { get; }
         public ICommand SaveServiceCommand { get; }
-        public ICommand SearchServiceCommand { get; }
         public ICommand AddProviderCommand { get; }
         public ICommand EditProviderCommand { get; }
         public ICommand DeleteProviderCommand { get; }
         public ICommand SaveProviderCommand { get; }
 
 
-        public MainViewModel(IProviderService providerService, IServiceService serviceService)
+        public MainViewModel(IProviderService providerService, IServiceService serviceService, CurrentUser currentUser)
         {
             _providerService = providerService;
             _serviceService = serviceService;
+            _currentUser = currentUser;
 
             LoadProviders();
 
@@ -53,8 +54,8 @@ namespace WPF.Client.ViewModels
             EditServiceCommand = new RelayCommand(EditService, CanEditService);
             DeleteServiceCommand = new RelayCommand(DeleteService, CanDeleteService);
             SaveServiceCommand = new RelayCommand(SaveService, CanSaveService);
-            SearchServiceCommand = new RelayCommand(SearchService);
-            AddProviderCommand = new RelayCommand(AddProvider);
+
+            AddProviderCommand = new RelayCommand(AddProvider, CanAddProvider);
             EditProviderCommand = new RelayCommand(EditProvider, CanEditProvider);
             DeleteProviderCommand = new RelayCommand(DeleteProvider, CanEditProvider);
             SaveProviderCommand = new RelayCommand(SaveProvider, CanSaveProvider);
@@ -120,15 +121,9 @@ namespace WPF.Client.ViewModels
             set => SetProperty(ref _newService, value);
         }
 
-        public List<Provider> GetAllProviders() 
-        {
-            return _providerService.GetAllProviders();
-        }
+        public List<Provider> GetAllProviders() => _providerService.GetAllProviders();
 
-        public List<Service> GetServicesBySelectedProvider()
-        {
-            return _serviceService.GetServicesByProvider(_selectedProvider.Id);
-        }
+        public List<Service> GetServicesBySelectedProvider() => _serviceService.GetServicesByProvider(_selectedProvider.Id);
         private async void LoadProviders()
         {
             var providers = await _providerService.GetAllProvidersAsync();
@@ -148,11 +143,6 @@ namespace WPF.Client.ViewModels
             }
         }
 
-        private void SearchService()
-        {
-
-        }
-
         private void AddProvider()
         {
             editProviderView = new EditProviderView(this, false);
@@ -165,7 +155,6 @@ namespace WPF.Client.ViewModels
             }
         }
 
-        
         private void AddService()
         {
             var newService = new Service
@@ -183,11 +172,10 @@ namespace WPF.Client.ViewModels
         }
 
         private bool CanEditService() => SelectedService != null;
-
-        private bool CanEditProvider() => SelectedProvider != null;
+        private bool CanAddProvider() => _currentUser.Role.Equals("admin");
+        private bool CanEditProvider() => SelectedProvider != null && _currentUser.Role.Equals("admin");
 
         private void EditProvider() 
-
         { 
             editProviderView = new EditProviderView(this, true);
 
@@ -211,10 +199,7 @@ namespace WPF.Client.ViewModels
 
         private bool CanSaveService() => NewService != null || SelectedService != null;
 
-        private bool CanSaveProvider()
-        {
-            return SelectedProvider != null || NewProvider != null;
-        }
+        private bool CanSaveProvider() => SelectedProvider != null || NewProvider != null;
 
         private void DeleteProvider() 
         {
