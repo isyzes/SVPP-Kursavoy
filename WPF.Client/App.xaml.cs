@@ -2,11 +2,8 @@
 using BLL.Services;
 using DAL.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
-using System.Data;
-using System.IO;
 using System.Windows;
 using WPF.Client.ViewModels;
 using WPF.Client.Views;
@@ -50,8 +47,6 @@ namespace WPF.Client
             services.AddSingleton<LoginView>();
             services.AddSingleton<EditProviderView>();
         }
-
-        
 
         protected override void OnStartup(StartupEventArgs e)
         {

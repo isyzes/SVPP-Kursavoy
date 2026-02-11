@@ -1,11 +1,8 @@
 ﻿using BLL.Models;
 using BLL.Services;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using WPF.Client.Views;
 
@@ -24,7 +21,6 @@ namespace WPF.Client.ViewModels
         private ObservableCollection<Service> _services;
         private Service _selectedService;
         private Service _newService;
-
 
         private ServiceEditWindow serviceEditWindow;
         private EditProviderView editProviderView;
