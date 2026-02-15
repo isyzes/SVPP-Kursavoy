@@ -36,12 +36,6 @@ namespace BLL.Services
             return entities.Select(e => MapToModel(e)).ToList();
         }
 
-
-        public Task<Provider> GetProviderByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateProviderAsync(Provider provider)
         {
             var existingEntity = _context.Providers.Find(provider.Id);

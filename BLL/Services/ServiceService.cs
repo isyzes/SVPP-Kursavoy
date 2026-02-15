@@ -1,7 +1,6 @@
 ﻿using BLL.Models;
 using DAL.Context;
 using DAL.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
