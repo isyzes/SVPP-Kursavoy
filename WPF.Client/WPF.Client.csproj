@@ -9,6 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="images\noLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="images\noLogo-1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
     <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>

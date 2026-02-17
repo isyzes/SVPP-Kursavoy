@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WPF.Client.Views"
         Title="Поставщик" 
-        Height="300" 
-        Width="600"
+        Height="550" 
+        Width="500"
         WindowStartupLocation="CenterOwner"
-       >
+        >
 
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Setter Property="Margin" Value="0,0,10,10"/>
         </Style>
 
         <Style TargetType="TextBox">
@@ -40,12 +40,20 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-  
+        <!-- Заголовок (опционально) -->
+        <TextBlock Grid.Row="0" 
+                   Text="Редактирование поставщика" 
+                   FontSize="16" 
+                   FontWeight="Bold" 
+                   Margin="0,0,0,15"/>
+
         <!-- Основные поля формы -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      Margin="0,0,0,10">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -60,36 +68,90 @@
                 </Grid.RowDefinitions>
 
                 <!-- Название компании -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Название компании*:"/>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Название компании*:" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="0" Grid.Column="1" 
                          Text="{Binding CarentProvider.Name, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
                 <!-- Номер телефона -->
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Телефон*:"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Телефон*:" VerticalAlignment="Center"/>
                 <TextBox Grid.Row="1" Grid.Column="1" 
                          Text="{Binding CarentProvider.Phone, RelativeSource={RelativeSource AncestorType=Window}}"/>
 
-                <!-- Адрес -->
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Адрес:"/>
-                <TextBox Grid.Row="5" Grid.Column="1" 
-                         Text="{Binding CarentProvider.Address, RelativeSource={RelativeSource AncestorType=Window}}"
+                <!-- Email -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Email:" VerticalAlignment="Center"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding CarentProvider.Email, RelativeSource={RelativeSource AncestorType=Window}}"/>
+
+                <!-- Рейтинг -->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Рейтинг (0-5):" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                    <Slider x:Name="slider" 
+                            Width="200"
+                            Minimum="0" 
+                            Maximum="5" 
+                            TickPlacement="TopLeft"
+                            Value="{Binding CarentProvider.Rating, RelativeSource={RelativeSource AncestorType=Window}}"
+                            IsSnapToTickEnabled="True"/>
+                    <TextBlock Text="{Binding ElementName=slider, Path=Value, StringFormat={}{0:F1}}" 
+                               VerticalAlignment="Center" 
+                               Margin="10,0,0,0"/>
+                </StackPanel>
+
+                <!-- Адрес (многострочный) -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Адрес:" VerticalAlignment="Top" Margin="0,5,10,0"/>
+                <TextBox Grid.Row="4" Grid.Column="1" 
                          Height="60"
-                         TextWrapping="Wrap"
+                         Text="{Binding CarentProvider.Address, RelativeSource={RelativeSource AncestorType=Window}}"
+                         TextWrapping="Wrap"  
+                         VerticalScrollBarVisibility="Auto"
                          VerticalContentAlignment="Top"
                          AcceptsReturn="True"/>
 
+                <!-- Логотип -->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Логотип:" VerticalAlignment="Top" Margin="0,15,10,0"/>
+                <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" Margin="0,10,0,10">
+                    <Image x:Name="logo" 
+                           Width="50" 
+                           Height="50"
+                           Margin="10,0,20,0"
+                                   
+                           Source="/images/noLogo.png"
+                           Stretch="Uniform"/>
+                    <StackPanel Orientation="Vertical">
+                        <Button Content="Выбрать файл" 
+                                FontWeight="Bold"
+                                Width="120"
+                                HorizontalAlignment="Left"/>
+                        <Button Content="Очистить" 
+                                Width="120"
+                                HorizontalAlignment="Left"
+                                Margin="5,5,5,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Разделительная линия -->
+                <Border Grid.Row="6" 
+                        Grid.ColumnSpan="2" 
+                        BorderBrush="#E0E0E0" 
+                        BorderThickness="0,1,0,0" 
+                        Margin="0,10,0,10"/>
             </Grid>
         </ScrollViewer>
 
         <!-- Кнопки действий -->
-        <Border Grid.Row="2" BorderBrush="#E0E0E0" BorderThickness="0,1,0,0" Margin="0,15,0,0">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+        <Border Grid.Row="2" 
+                BorderBrush="#E0E0E0" 
+                BorderThickness="0,1,0,0" 
+                Padding="0,15,0,0">
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
                 <Button Content="Сохранить" 
                         Command="{Binding SaveProviderCommand}"
-                        FontWeight="Bold"/>
-
+                        FontWeight="Bold"
+                        IsDefault="True"/>
                 <Button Content="Отмена" 
-                        IsCancel="True" />
+                        IsCancel="True" 
+                        Margin="10,5,5,5"/>
             </StackPanel>
         </Border>
     </Grid>

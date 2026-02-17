@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF.Client.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="600">
+             SizeToContent="WidthAndHeight"
+             d:DesignHeight="450" d:DesignWidth="400">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,15 +29,23 @@
         <TextBox Grid.Row="1" Margin="0,0,0,10" Text="{Binding CarentService.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
 
         <TextBlock Grid.Row="2" Text="Описание:" Margin="0,0,0,5"/>
-        <TextBox Grid.Row="3" Height="60" AcceptsReturn="True" Margin="0,0,0,10" Text="{Binding CarentService.Description, RelativeSource={RelativeSource AncestorType=Window}}" />
+        <TextBox Grid.Row="3" Height="60" AcceptsReturn="True" TextWrapping="Wrap"  VerticalScrollBarVisibility="Auto" Margin="0,0,0,10" Text="{Binding CarentService.Description, RelativeSource={RelativeSource AncestorType=Window}}" />
 
         <TextBlock Grid.Row="4" Text="Цена:" Margin="0,0,0,5"/>
         <TextBox Grid.Row="5" Margin="0,0,0,20" Text="{Binding CarentService.Price, RelativeSource={RelativeSource AncestorType=Window}}" />
+       
+        <TextBlock Grid.Row="6" Text="Категория:" Margin="0,0,0,5"/>
+        <ComboBox Grid.Row="7" x:Name="CategoryFilterComboBox" Margin="0,0,0,5" >
+            <ComboBoxItem Content="УБОРКА И КЛИНИНГ" />
+            <ComboBoxItem Content="РЕМОНТ И ОБСЛУЖИВАНИЕ" />
+            <ComboBoxItem Content="ПЕРЕЕЗД И ГРУЗОПЕРЕВОЗКИ" />
+            <ComboBoxItem Content="БЫТОВАЯ ПОМОЩЬ И УХОД" />
+        </ComboBox>
 
         <TextBlock Grid.Row="8" Text="Время выполнения:" Margin="0,0,0,5"/>
         <TextBox Grid.Row="9" Margin="0,0,0,20" Text="{Binding CarentService.Duration, RelativeSource={RelativeSource AncestorType=Window}}" />
 
-        <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Right">
+        <StackPanel Grid.Row="11" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Сохранить" Width="80" Margin="0,0,10,0"  IsDefault="True" Command="{Binding SaveServiceCommand}" />
             <Button Content="Отмена" Width="80" IsCancel="True" />
         </StackPanel>
