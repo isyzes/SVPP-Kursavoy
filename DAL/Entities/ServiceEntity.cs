@@ -8,6 +8,7 @@ namespace DAL.Entities
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Duration { get; set; } // в минутах
+        public string? Category { get; set; }
         public int ProviderId { get; set; }
 
         // Навигационное свойство

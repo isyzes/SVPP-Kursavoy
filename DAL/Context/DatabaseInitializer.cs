@@ -6,7 +6,7 @@ namespace DAL.Context
     {
         public static void Initialize(AppDbContext context)
         {
-
+            context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (context.Providers.Any() || context.Services.Any())
@@ -18,7 +18,6 @@ namespace DAL.Context
             {
                 new ProviderEntity
                 {
-                    
                     Name = "ТехноСервис",
                     Phone = "+7 (495) 123-45-67",
                     Address = "г. Москва, ул. Ленина, д. 10"

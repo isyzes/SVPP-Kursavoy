@@ -115,19 +115,19 @@
                            Height="50"
                            Margin="10,0,20,0"
                                    
-                           Source="/images/noLogo.png"
+                           Source="{Binding CarentProvider.DisplayLogo, RelativeSource={RelativeSource AncestorType=Window}}"
                            Stretch="Uniform"/>
                     <StackPanel Orientation="Vertical">
                         <Button Content="Выбрать файл" 
                                 FontWeight="Bold"
                                 Height="25"
                                 Width="120"
-                                HorizontalAlignment="Left"/>
+                                HorizontalAlignment="Left" Click="Select_Image_Click"/>
                         <Button Content="Очистить" 
                                 Width="120"
                                  Height="25"
                                 HorizontalAlignment="Left"
-                                Margin="5,5,5,0"/>
+                                Margin="5,5,5,0" Click="Clear_Logo_Click"/>
                     </StackPanel>
                 </StackPanel>
 

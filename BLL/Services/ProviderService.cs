@@ -45,6 +45,9 @@ namespace BLL.Services
                 existingEntity.Name = provider.Name;
                 existingEntity.Phone = provider.Phone;
                 existingEntity.Address = provider.Address;
+                existingEntity.Rating = provider.Rating;
+                existingEntity.Logo = provider.Logo;
+                existingEntity.Email = provider.Email;
 
                 _context.SaveChanges();
             }
@@ -57,7 +60,10 @@ namespace BLL.Services
                 Id = entity.Id,
                 Name = entity.Name,
                 Phone = entity.Phone,
-                Address = entity.Address
+                Address = entity.Address,
+                Rating = entity.Rating,
+                Email = entity.Email,
+                Logo = entity.Logo
             };
         }
 
@@ -68,7 +74,10 @@ namespace BLL.Services
                 Id = provider.Id,
                 Name = provider.Name,
                 Phone = provider.Phone,
-                Address = provider.Address
+                Address = provider.Address,
+                Rating = provider.Rating,
+                Email = provider.Email,
+                Logo = provider.Logo
             };
         }
 

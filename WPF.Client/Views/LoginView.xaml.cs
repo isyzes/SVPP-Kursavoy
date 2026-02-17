@@ -39,5 +39,10 @@ namespace WPF.Client.Views
                 errorMessage.Text = "Неверный логин или пароль!";
             }
         }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+        }
     }
 }

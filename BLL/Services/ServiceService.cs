@@ -56,6 +56,8 @@ namespace BLL.Services
                 existingEntity.Description = service.Description;
                 existingEntity.Price = service.Price;
                 existingEntity.Duration = service.Duration;
+                existingEntity.Category = service.Category;
+                
 
                 _context.SaveChanges(); 
             }
@@ -70,7 +72,8 @@ namespace BLL.Services
                 Description = entity.Description,
                 Price = entity.Price,
                 Duration = entity.Duration,
-                ProviderId = entity.ProviderId
+                ProviderId = entity.ProviderId,
+                Category = entity.Category
             };
         }
 
@@ -82,7 +85,8 @@ namespace BLL.Services
                 Description = service.Description,
                 Price = service.Price,
                 Duration = service.Duration,
-                ProviderId = service.ProviderId
+                ProviderId = service.ProviderId,
+                Category = service.Category
             };
         }
 

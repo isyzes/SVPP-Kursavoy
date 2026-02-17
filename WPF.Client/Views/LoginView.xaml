@@ -82,7 +82,7 @@
                 <Button Content="Отмена" 
                         Width="100" 
                         Height="30"
-                        Background="LightGray"/>
+                        Background="LightGray" Click="Cancel_Click"/>
             </StackPanel>
         </Grid>
     </Border>

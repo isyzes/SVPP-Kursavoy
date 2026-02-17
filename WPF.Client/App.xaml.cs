@@ -29,7 +29,7 @@ namespace WPF.Client
 
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer("Data Source=USER-PC\\SQLEXPRESS;Initial Catalog=HouseholdServicesDB;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True");
+                options.UseSqlServer(connectionString);
             }, ServiceLifetime.Scoped);
 
 
@@ -60,7 +60,6 @@ namespace WPF.Client
             InitializeDatabase();
 
             var loginView = _serviceProvider.GetRequiredService<LoginView>();
-            //var loginView = new LoginView();
             var loginResult = loginView.ShowDialog();
             if (loginResult == true)
             {

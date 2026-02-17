@@ -33,13 +33,14 @@
 
         <TextBlock Grid.Row="4" Text="Цена:" Margin="0,0,0,5"/>
         <TextBox Grid.Row="5" Margin="0,0,0,20" Text="{Binding CarentService.Price, RelativeSource={RelativeSource AncestorType=Window}}" />
-       
+
         <TextBlock Grid.Row="6" Text="Категория:" Margin="0,0,0,5"/>
-        <ComboBox Grid.Row="7" x:Name="CategoryFilterComboBox" Margin="0,0,0,5" >
-            <ComboBoxItem Content="УБОРКА И КЛИНИНГ" />
-            <ComboBoxItem Content="РЕМОНТ И ОБСЛУЖИВАНИЕ" />
-            <ComboBoxItem Content="ПЕРЕЕЗД И ГРУЗОПЕРЕВОЗКИ" />
-            <ComboBoxItem Content="БЫТОВАЯ ПОМОЩЬ И УХОД" />
+        <ComboBox Grid.Row="7" 
+                  x:Name="CategoryFilterComboBox" 
+                  Margin="0,0,0,5" 
+                  ItemsSource="{Binding CarentService.Categories, RelativeSource={RelativeSource AncestorType=Window}}"
+                  SelectedItem="{Binding CarentService.Category, RelativeSource={RelativeSource AncestorType=Window}}">
+     
         </ComboBox>
 
         <TextBlock Grid.Row="8" Text="Время выполнения:" Margin="0,0,0,5"/>

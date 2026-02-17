@@ -1,5 +1,6 @@
 ﻿using BLL.Models;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using WPF.Client.ViewModels;
 
 namespace WPF.Client.Views
@@ -40,5 +41,18 @@ namespace WPF.Client.Views
 
         public bool IsEditMod() { return _editMod; }
 
+        private void Clear_Logo_Click(object sender, RoutedEventArgs e)
+        {
+            logo.Source = new BitmapImage(new Uri("/images/noLogo.png", UriKind.RelativeOrAbsolute)); ;
+        }
+
+        private void Select_Image_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == false) return;
+            CarentProvider.Logo = openFileDialog.FileName;
+            logo.Source = new BitmapImage(new Uri(CarentProvider.Logo, UriKind.RelativeOrAbsolute));
+        }
     }  
 }
