@@ -120,10 +120,12 @@
                     <StackPanel Orientation="Vertical">
                         <Button Content="Выбрать файл" 
                                 FontWeight="Bold"
+                                Height="25"
                                 Width="120"
                                 HorizontalAlignment="Left"/>
                         <Button Content="Очистить" 
                                 Width="120"
+                                 Height="25"
                                 HorizontalAlignment="Left"
                                 Margin="5,5,5,0"/>
                     </StackPanel>
